@@ -20,8 +20,6 @@ import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.cloud.netflix.zuul.filters.ProxyRouteLocator;
 import org.springframework.cloud.netflix.zuul.filters.ZuulProperties;
 
-import java.util.Collection;
-import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
@@ -32,43 +30,18 @@ public class RepositoryProxyRouteLocator extends ProxyRouteLocator {
 
     private final ZuulRouteRepository repository;
 
-    public RepositoryProxyRouteLocator(String servletPath, DiscoveryClient discovery, ZuulRouteRepository repository) {
-        super(servletPath, discovery, null);
+    public RepositoryProxyRouteLocator(String servletPath,
+                                       DiscoveryClient discovery,
+                                       ZuulProperties properties,
+                                       ZuulRouteRepository repository) {
+        super(servletPath, discovery, properties);
         this.repository = repository;
     }
 
     @Override
-    public void addRoute(String path, String location) {
-        super.addRoute(path, location);
-    }
-
-    @Override
-    public void addRoute(ZuulProperties.ZuulRoute route) {
-        super.addRoute(route);
-    }
-
-    @Override
-    public Collection<String> getRoutePaths() {
-        return super.getRoutePaths();
-    }
-
-    @Override
-    public Map<String, String> getRoutes() {
-        return super.getRoutes();
-    }
-
-    @Override
-    public ProxyRouteSpec getMatchingRoute(String path) {
-        return super.getMatchingRoute(path);
-    }
-
-    @Override
-    public String getTargetPath(String matchingRoute, String requestURI) {
-        return super.getTargetPath(matchingRoute, requestURI);
-    }
-
-    @Override
-    protected LinkedHashMap<String, ZuulProperties.ZuulRoute> locateRoutes() {
-        return super.locateRoutes();
+    protected void addConfiguredRoutes(Map<String, ZuulProperties.ZuulRoute> routes) {
+        for(ZuulProperties.ZuulRoute route : repository.findAll()) {
+            routes.put(route.getPath(), route);
+        }
     }
 }
