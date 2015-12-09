@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-io.jmnarloch.spring.cloud.zuul.support.CassandraZuulRouteAutoConfiguration
+io.jmnarloch.spring.cloud.zuul.support.CassandraZuulStoreAutoConfiguration
