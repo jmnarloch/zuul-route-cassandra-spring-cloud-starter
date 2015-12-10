@@ -29,6 +29,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.net.InetAddress;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -48,7 +49,7 @@ import static org.springframework.test.context.TestExecutionListeners.MergeMode.
 @TestExecutionListeners(
         value = { CassandraUnitTestExecutionListener.class },
         mergeMode = MERGE_WITH_DEFAULTS)
-@CassandraDataSet(value = { "cassandra/data.cql" })
+@CassandraDataSet(value = { "schema/cassandra.cql" })
 @EmbeddedCassandra
 public class CassandraZuulRouteStoreTest {
 
@@ -60,7 +61,7 @@ public class CassandraZuulRouteStoreTest {
     public void setUp() throws Exception {
 
         final Cluster cluster = Cluster.builder()
-                .addContactPoints("127.0.0.1")
+                .addContactPoints(InetAddress.getLoopbackAddress())
                 .withPort(9142)
                 .build();
         cassandraTemplate = new CassandraTemplate(cluster.connect("zuul"));

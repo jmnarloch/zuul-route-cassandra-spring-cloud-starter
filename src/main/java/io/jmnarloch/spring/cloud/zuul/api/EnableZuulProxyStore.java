@@ -37,5 +37,5 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 @Import(ZuulProxyStoreConfiguration.class)
-public @interface EnableStorableZuulProxy {
+public @interface EnableZuulProxyStore {
 }

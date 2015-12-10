@@ -1,4 +1,6 @@
-CREATE KEYSPACE zuul WITH REPLICATION = { 'class' : 'SimpleStrategy', 'replication_factor' : 1 };
+DROP KEYSPACE IF EXISTS zuul;
+
+CREATE KEYSPACE IF NOT EXISTS zuul WITH REPLICATION = { 'class' : 'SimpleStrategy', 'replication_factor' : 1 };
 
 USE zuul;
 

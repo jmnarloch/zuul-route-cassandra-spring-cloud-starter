@@ -29,7 +29,7 @@ import org.springframework.data.cassandra.core.CassandraOperations;
  * @author Jakub Narloch
  */
 @Configuration
-@ConditionalOnProperty(value = "zuul.store.cassandra.enabled", matchIfMissing = false)
+@ConditionalOnProperty(value = "zuul.store.cassandra.enabled", havingValue = "true", matchIfMissing = false)
 public class CassandraZuulStoreAutoConfiguration {
 
     @Bean
