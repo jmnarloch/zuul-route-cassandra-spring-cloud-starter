@@ -98,7 +98,7 @@ zuul:
 
 ```
 
-Finally enable the Zuul proxy with `@EnableZuulProxyStore` use this annotation as a replacement for standard `@EnableZuulProxy`:
+Finally enable the Zuul proxy with `@EnableZuulProxyStore` - use this annotation as a replacement for standard `@EnableZuulProxy`:
 
 ```java
 @EnableZuulProxyStore
