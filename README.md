@@ -87,7 +87,7 @@ public static class Application {
 }
 ```
 
-Enable the Zuul routes Cassandra store:
+Configure the Cassandra to be used for loading the Zuul routes:
 
 ```yaml
 
