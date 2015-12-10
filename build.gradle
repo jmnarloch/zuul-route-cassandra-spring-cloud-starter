@@ -61,6 +61,8 @@ dependencies {
 
     testCompile (libraries.springBootWeb)
     testCompile (libraries.springBootTest)
+    testCompile (libraries.cassandraUnit)
+    testCompile (libraries.cassandraDriver)
     testCompile (libraries.junit)
     testCompile (libraries.mockito)
 }

@@ -7,8 +7,12 @@ ext {
             springCloudZuul                 : 'org.springframework.cloud:spring-cloud-starter-zuul:1.0.3.RELEASE',
 
             springBootWeb                   : 'org.springframework.boot:spring-boot-starter-web:1.2.5.RELEASE',
-            springDataCassandra             : 'org.springframework.data:spring-data-cassandra:1.2.2.RELEASE',
             springBootTest                  : 'org.springframework.boot:spring-boot-starter-test:1.2.5.RELEASE',
+
+            springDataCassandra             : 'org.springframework.data:spring-data-cassandra:1.2.2.RELEASE',
+
+            cassandraUnit                   : 'org.cassandraunit:cassandra-unit-spring:2.1.9.2',
+            cassandraDriver                 : 'com.datastax.cassandra:cassandra-driver-core:2.1.7.1',
 
             junit                           : 'junit:junit:4.12',
             mockito                         : 'org.mockito:mockito-all:1.10.19'
