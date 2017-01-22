@@ -59,10 +59,11 @@ dependencies {
         ext.optional = true
     }
 
-    testCompile (libraries.springBootWeb)
+    testCompile (libraries.springTest)
     testCompile (libraries.springBootTest)
     testCompile (libraries.cassandraUnit)
     testCompile (libraries.cassandraDriver)
+    testCompile (libraries.apacheHttpClient)
     testCompile (libraries.junit)
     testCompile (libraries.mockito)
 }

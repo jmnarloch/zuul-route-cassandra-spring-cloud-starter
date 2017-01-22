@@ -122,7 +122,7 @@ public class CassandraZuulRouteStore implements ZuulRouteStore {
         @Override
         public ZuulProperties.ZuulRoute mapRow(Row row, int rowNum) throws DriverException {
 
-            return new ZuulProperties.ZuulRoute(
+            ZuulProperties.ZuulRoute route = new ZuulProperties.ZuulRoute(
                     row.getString("id"),
                     row.getString("path"),
                     row.getString("service_id"),
@@ -131,6 +131,11 @@ public class CassandraZuulRouteStore implements ZuulRouteStore {
                     row.getBool("retryable"),
                     row.getSet("sensitive_headers", String.class)
             );
+
+            // TODO (tmack): found error in the above ZuulProperties.ZuulRoute constructor...
+            route.setCustomSensitiveHeaders(route.getSensitiveHeaders() != null && route.getSensitiveHeaders().size() > 0);
+
+            return route;
         }
     }
 }

@@ -20,7 +20,7 @@ import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.cloud.netflix.zuul.filters.ZuulProperties;
 import org.springframework.cloud.netflix.zuul.filters.discovery.DiscoveryClientRouteLocator;
 
-import java.util.Map;
+import java.util.LinkedHashMap;
 
 /**
  * A simple {@link org.springframework.cloud.netflix.zuul.filters.RouteLocator} that is being populated from configured
@@ -51,9 +51,12 @@ public class StoreRefreshableRouteLocator extends DiscoveryClientRouteLocator {
      * {@inheritDoc}
      */
     @Override
-    protected void addConfiguredRoutes(Map<String, ZuulProperties.ZuulRoute> routes) {
+    protected LinkedHashMap<String, ZuulProperties.ZuulRoute> locateRoutes() {
+        LinkedHashMap<String, ZuulProperties.ZuulRoute> routesMap = new LinkedHashMap<>();
+        routesMap.putAll(super.locateRoutes());
         for (ZuulProperties.ZuulRoute route : store.findAll()) {
-            routes.put(route.getPath(), route);
+            routesMap.put(route.getPath(), route);
         }
+        return routesMap;
     }
 }

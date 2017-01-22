@@ -79,7 +79,7 @@ public class CassandraZuulProxyStoreTest {
         // then
         assertNotNull(route);
         assertEquals(1, route.getSensitiveHeaders().size());
-        assertTrue(route.getSensitiveHeaders().contains("Authorization"));
+        assertTrue(route.getSensitiveHeaders().contains("authorization"));
     }
 
     @EnableZuulProxyStore
