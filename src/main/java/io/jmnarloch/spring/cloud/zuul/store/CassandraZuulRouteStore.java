@@ -128,7 +128,8 @@ public class CassandraZuulRouteStore implements ZuulRouteStore {
                     row.getString("service_id"),
                     row.getString("url"),
                     row.getBool("strip_prefix"),
-                    row.getBool("retryable")
+                    row.getBool("retryable"),
+                    row.getSet("sensitive_headers", String.class)
             );
         }
     }

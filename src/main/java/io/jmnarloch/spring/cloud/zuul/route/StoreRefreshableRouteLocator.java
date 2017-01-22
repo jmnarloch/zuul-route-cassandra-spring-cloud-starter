@@ -17,8 +17,8 @@ package io.jmnarloch.spring.cloud.zuul.route;
 
 import io.jmnarloch.spring.cloud.zuul.store.ZuulRouteStore;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
-import org.springframework.cloud.netflix.zuul.filters.ProxyRouteLocator;
 import org.springframework.cloud.netflix.zuul.filters.ZuulProperties;
+import org.springframework.cloud.netflix.zuul.filters.discovery.DiscoveryClientRouteLocator;
 
 import java.util.Map;
 
@@ -28,21 +28,21 @@ import java.util.Map;
  *
  * @author Jakub Narloch
  */
-public class StoreProxyRouteLocator extends ProxyRouteLocator {
+public class StoreRefreshableRouteLocator extends DiscoveryClientRouteLocator {
 
     private final ZuulRouteStore store;
 
     /**
-     * Creates new instance of {@link StoreProxyRouteLocator}
+     * Creates new instance of {@link StoreRefreshableRouteLocator}
      * @param servletPath the application servlet path
      * @param discovery the discovery service
      * @param properties the zuul properties
      * @param store the route store
      */
-    public StoreProxyRouteLocator(String servletPath,
-                                  DiscoveryClient discovery,
-                                  ZuulProperties properties,
-                                  ZuulRouteStore store) {
+    public StoreRefreshableRouteLocator(String servletPath,
+                                        DiscoveryClient discovery,
+                                        ZuulProperties properties,
+                                        ZuulRouteStore store) {
         super(servletPath, discovery, properties);
         this.store = store;
     }
