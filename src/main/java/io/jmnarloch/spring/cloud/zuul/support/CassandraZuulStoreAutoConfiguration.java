@@ -36,6 +36,6 @@ public class CassandraZuulStoreAutoConfiguration {
     @ConditionalOnMissingBean
     public ZuulRouteStore cassandraZuulRouteStore(CassandraOperations cassandraOperations) {
 
-        return new CassandraZuulRouteStore(cassandraOperations);
+        return new CassandraZuulRouteStore(cassandraOperations, "zuul", "zuul_routes");
     }
 }

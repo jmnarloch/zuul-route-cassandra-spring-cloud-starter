@@ -4,15 +4,18 @@ ext {
 
             springBootConfigurationProcessor: 'org.springframework.boot:spring-boot-configuration-processor:1.2.5.RELEASE',
 
-            springCloudZuul                 : 'org.springframework.cloud:spring-cloud-starter-zuul:1.0.3.RELEASE',
+            springCloudZuul                 : 'org.springframework.cloud:spring-cloud-starter-zuul:1.2.4.RELEASE',
 
-            springBootWeb                   : 'org.springframework.boot:spring-boot-starter-web:1.2.5.RELEASE',
-            springBootTest                  : 'org.springframework.boot:spring-boot-starter-test:1.2.5.RELEASE',
+            springBootStarterTest           : 'org.springframework.boot:spring-boot-starter-test1.4.0.RELEASE',
+            springBootTest                  : 'org.springframework.boot:spring-boot-test:1.4.3.RELEASE',
+            springTest                      : 'org.springframework:spring-test:4.1.9.RELEASE',
 
             springDataCassandra             : 'org.springframework.data:spring-data-cassandra:1.2.2.RELEASE',
 
             cassandraUnit                   : 'org.cassandraunit:cassandra-unit-spring:2.1.9.2',
             cassandraDriver                 : 'com.datastax.cassandra:cassandra-driver-core:2.1.7.1',
+
+            apacheHttpClient                : 'org.apache.httpcomponents:httpclient:4.3.5',
 
             junit                           : 'junit:junit:4.12',
             mockito                         : 'org.mockito:mockito-all:1.10.19'

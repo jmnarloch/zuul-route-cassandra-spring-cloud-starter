@@ -17,7 +17,7 @@ package io.jmnarloch.spring.cloud.zuul;
 
 import com.datastax.driver.core.Cluster;
 import io.jmnarloch.spring.cloud.zuul.api.EnableZuulProxyStore;
-import io.jmnarloch.spring.cloud.zuul.route.StoreProxyRouteLocator;
+import io.jmnarloch.spring.cloud.zuul.route.StoreRefreshableRouteLocator;
 import org.cassandraunit.spring.CassandraDataSet;
 import org.cassandraunit.spring.CassandraUnitDependencyInjectionTestExecutionListener;
 import org.cassandraunit.spring.EmbeddedCassandra;
@@ -27,7 +27,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.boot.test.WebIntegrationTest;
-import org.springframework.cloud.netflix.zuul.filters.ProxyRouteLocator;
+import org.springframework.cloud.netflix.zuul.filters.Route;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.cassandra.core.CassandraOperations;
 import org.springframework.data.cassandra.core.CassandraTemplate;
@@ -36,8 +36,10 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.net.InetAddress;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 import static org.springframework.test.context.TestExecutionListeners.MergeMode.MERGE_WITH_DEFAULTS;
 
 /**
@@ -56,13 +58,13 @@ import static org.springframework.test.context.TestExecutionListeners.MergeMode.
 public class CassandraZuulProxyStoreTest {
 
     @Autowired
-    private StoreProxyRouteLocator proxyRouteLocator;
+    private StoreRefreshableRouteLocator refreshableRouteLocator;
 
     @Test
     public void shouldNotFindMatchingRoute() {
 
         // when
-        ProxyRouteLocator.ProxyRouteSpec route = proxyRouteLocator.getMatchingRoute("/web/**");
+        Route route = refreshableRouteLocator.getMatchingRoute("/web/**");
 
         // then
         assertNull(route);
@@ -72,10 +74,12 @@ public class CassandraZuulProxyStoreTest {
     public void shouldFindMatchingRoute() {
 
         // when
-        ProxyRouteLocator.ProxyRouteSpec route = proxyRouteLocator.getMatchingRoute("/uaa/**");
+        Route route = refreshableRouteLocator.getMatchingRoute("/uaa/**");
 
         // then
         assertNotNull(route);
+        assertEquals(1, route.getSensitiveHeaders().size());
+        assertTrue(route.getSensitiveHeaders().contains("authorization"));
     }
 
     @EnableZuulProxyStore

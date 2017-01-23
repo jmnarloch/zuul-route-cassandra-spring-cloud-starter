@@ -11,8 +11,9 @@ CREATE TABLE zuul_routes (
     url text,
     strip_prefix boolean,
     retryable boolean,
+    sensitive_headers set<text>,
     PRIMARY KEY(id)
 );
 
 INSERT INTO zuul_routes(id, path, service_id) VALUES ('resource', '/api/**', 'rest-service');
-INSERT INTO zuul_routes(id, path, service_id, strip_prefix) VALUES ('oauth2', '/uaa/**', 'oauth2-service', true);
+INSERT INTO zuul_routes(id, path, service_id, strip_prefix, sensitive_headers) VALUES ('oauth2', '/uaa/**', 'oauth2-service', true, {'Authorization'});
